@@ -1,1 +1,63 @@
+THE BEAUTY OF QUESTION IS THAT WE CAN USE SET IN PLACE OF UNORDER_SET
 
+
+But unorder_set provide-
+
+1. Fast Lookup for Duplicate Detection
+O(1) average time complexity for find(), insert(), and erase() operations
+
+Critical since we check for duplicates (seen.find(s[right])) in every iteration
+
+Much faster than ordered sets (O(log n) per operation) or linear scans (O(n))
+
+2. No Need for Ordered Elements
+We only care about existence of characters, not their order
+
+unordered_set uses hashing while set maintains sorted order (unnecessary overhead)
+
+Example: Checking if 'b' exists is equally fast whether the set is {'a','b'} or {'b','a'}
+
+3. Memory Efficiency
+Uses less memory than set (no need to maintain tree structures)
+
+Only stores the characters themselves (no extra metadata for ordering)
+
+4. Perfect for Sliding Window Operations
+When we remove a character (seen.erase(s[left])), it's an O(1) operation
+
+When we add a character (seen.insert(s[right])), it's typically O(1)
+
+This matches perfectly with our window adjustment needs
+
+
+
+
+
+
+
+
+HERES THE CODE FOR SET
+
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        int n=s.size();
+        set<char> seen;
+        int max_length=0;
+        int left=0;
+        for(int right=0;right<n;right++){
+            while(seen.find(s[right])!=seen.end()){
+                seen.erase(s[left]);
+                left++;
+            }
+            seen.insert(s[right]);
+            max_length=max(max_length,right-left+1);
+        }
+        return max_length;
+    }
+};
+
+
+
+for set memory uses 17.3 MB and runtime 26ms
+for unordered_set memory uses 14.39 MB and runtime 19ms
