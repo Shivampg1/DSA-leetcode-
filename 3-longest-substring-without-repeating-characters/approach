@@ -1,1 +1,57 @@
+Initial state:
+
+s = "abcabcbb"
+
+seen = {} (empty set)
+
+left = 0
+
+max_len = 0
+
+Iteration 1: right=0 ('a')
+seen.find('a') == seen.end() → 'a' not in set
+
+Add 'a' to set: seen = {'a'}
+
+Window: s[0..0] = "a"
+
+Update max_len: max(0, 0-0+1) = 1
+
+Iteration 2: right=1 ('b')
+'b' not in set
+
+Add 'b': seen = {'a', 'b'}
+
+Window: s[0..1] = "ab"
+
+max_len = max(1, 1-0+1) = 2
+
+Iteration 3: right=2 ('c')
+'c' not in set
+
+Add 'c': seen = {'a', 'b', 'c'}
+
+Window: s[0..2] = "abc"
+
+max_len = max(2, 2-0+1) = 3
+
+Iteration 4: right=3 ('a')
+seen.find('a') != seen.end() → 'a' IS in set (this is the duplicate)
+
+Enter while loop:
+
+Remove s[left] = 'a': seen = {'b', 'c'}
+
+left++ → left = 1
+
+Now check again: seen.find('a') == seen.end() → exit while loop
+
+Add 'a': seen = {'b', 'c', 'a'}
+
+Window: s[1..3] = "bca"
+
+max_len remains 3 (since 3-1+1 = 3)
+
+
+
 
