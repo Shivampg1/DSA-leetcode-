@@ -52,6 +52,8 @@ Window: s[1..3] = "bca"
 
 max_len remains 3 (since 3-1+1 = 3)
 
-
-
+In this we can use the sliding window technique involves maintaining a dynamic window (substring) that can expand or shrink based on certain conditions
+using this code 
+seen.find(s[right]) != seen.end()
+//that will return duplicate element in the set.
 
