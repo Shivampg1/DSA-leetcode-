@@ -1,1 +1,27 @@
 approach
+
+Value Comparison (leftNode->val == rightNode->val):
+
+First, the code checks if the values of the current nodes (leftNode and rightNode) are equal.
+
+If the values are not the same, the function returns false immediately, indicating that the subtrees cannot be mirrors.
+
+Recursive Mirror Checks:
+
+isMirror(leftNode->left, rightNode->right):
+
+This checks if the left child of leftNode is a mirror of the right child of rightNode.
+
+This ensures that the outer nodes (left of left subtree and right of right subtree) are symmetric.
+
+isMirror(leftNode->right, rightNode->left):
+
+This checks if the right child of leftNode is a mirror of the left child of rightNode.
+
+This ensures that the inner nodes (right of left subtree and left of right subtree) are symmetric.
+
+Logical AND (&&):
+
+The results of the value comparison and the two recursive checks are combined using the logical AND operator.
+
+All three conditions must be true for the function to return true, meaning the subtrees are mirrors of each other.
