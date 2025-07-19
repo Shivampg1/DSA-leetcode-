@@ -1,1 +1,28 @@
+This code is same as maximum depth of a binary tree
+but the main change is in the place of max(left_node,right_node)+1 we use min(left_node,right_node)+1
 
+also if their is only left or right tree eg:   1          1
+                                              /            \
+                                             3              2
+                                            /                \
+                                           4                  3
+
+Then in this case we have to use max case
+if(left_node==NULL || right_node==NULL){
+return max(left_node,right_node)+1;
+
+heres how the code going to work
+
+Left child is NULL (right exists):
+left_depth = 0, right_depth > 0
+Must take right_depth (the existing path)
+max(0, right_depth) + 1 = right_depth + 1
+
+Right child is NULL (left exists):
+right_depth = 0, left_depth > 0
+Must take left_depth (the existing path)
+max(left_depth, 0) + 1 = left_depth + 1
+
+Both children exist:
+Skips this if-block
+Uses min(left_depth, right_depth) + 1
