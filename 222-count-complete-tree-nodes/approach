@@ -1,1 +1,12 @@
+here we can also use different approach apart from Queue i.e normal iterative approach
+class Solution {
+public:
+    int countNodes(TreeNode* root) {
+        if(root == NULL) {
+            return 0;
+        }
+        return 1 + countNodes(root->left) + countNodes(root->right);
+    }
+};
 
+this iterative approach has 0 runtime and memory is 31.3MB which is less than Queue approach that also uses 0 rutime but memory is 32MB
