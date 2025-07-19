@@ -14,7 +14,7 @@ public:
     TreeNode* sortedArrayToBST(vector<int>& nums) {
         return BST(nums,0,nums.size()-1);
     }
-    TreeNode* BST(vector<int> nums,int st,int end){
+    TreeNode* BST(vector<int>& nums,int st,int end){
         if(st>end){
             return NULL; 
         }
