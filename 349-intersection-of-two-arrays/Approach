@@ -1,1 +1,39 @@
+we can also use 
+vector<int> intersection(vector<int>& nums1, vector<int>& nums2) {
+        vector<int> result;
+      
+        for (int i = 0; i < nums1.size(); i++) {
+            for (int j = 0; j < nums2.size(); j++) {
+                if (nums1[i] == nums2[j]) {
+                    result.push_back(nums1[i]);
+                    break;
 
+                }
+            }
+        }
+        
+        // Remove duplicates from the result
+
+        sort(result.begin(), result.end());
+        result.erase(unique(result.begin(), result.end()), result.end());
+        
+        return result;
+    }
+};
+
+Explanation
+result.erase(unique(result.begin(), result.end()), result.end());
+
+First, the vector must be sorted (done earlier with sort):
+
+Example: [1, 2, 2, 3, 3, 3]
+
+unique() moves duplicates to the end:
+
+Transforms to: [1, 2, 3, 2, 3, 3]
+
+Returns iterator pointing to first duplicate (after 3)
+
+erase() removes from the unique end to actual end:
+
+Final vector: [1, 2, 3]
