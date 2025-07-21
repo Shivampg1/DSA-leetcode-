@@ -1,1 +1,28 @@
+//But this code has some error
 
+class Solution {
+public:
+    TreeNode* searchBST(TreeNode* root, int val) {
+        vector<int> ans;
+        vector<int> res;
+        inorder(root,ans);
+    
+        for(int i=1;i<ans.size()-1;i++){
+            if(ans[i]==val){
+                res.push_back(ans[i-1]);
+                res.push_back(ans[i]);
+                res.push_back(ans[i+1]);
+            }
+        }
+        return nullptr;
+
+    }
+    void inorder(TreeNode* node,vector<int>& ans){
+        if(node==NULL){
+            return;
+        }
+        inorder(node->left,ans);
+        ans.push_back(node->val);
+        inorder(node->right,ans);
+    }
+};
