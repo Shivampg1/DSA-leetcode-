@@ -14,7 +14,6 @@ public:
     bool findTarget(TreeNode* root, int k) {
         vector<int>ans;
         inorder(root,ans);
-        //return ans;
         int j=ans.size()-1;
         int i=0;
         while(i<j){
@@ -25,7 +24,6 @@ public:
             j--;
         }
         else{
-        //if(ans[i]+ans[j]==k){
             return true;
         }
 
