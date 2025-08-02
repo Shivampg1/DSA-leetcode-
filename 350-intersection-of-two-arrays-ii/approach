@@ -1,1 +1,8 @@
+//This code is accepted in one go without any single error
+with Runtime- 0ms and beats 100%
+Having time complexity O(Nlogn)
+And Space complexity is O(1)
 
+1-> sort the both array
+2-> use two pointer approach
+then apply the condition;
