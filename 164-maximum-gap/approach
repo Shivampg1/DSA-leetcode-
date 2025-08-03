@@ -1,1 +1,6 @@
+//This is very simple problem
+First we have to sort the given array
+Then we have to return 0 if the array size is less than 2;
 
+After that we have to find max val by subtracting arr[i]-arr[i-1]
+then return the value
