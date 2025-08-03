@@ -1,1 +1,4 @@
+//Its not a medium level but its an easy level questions
 
+Here at first we have to sort the given array in ascending order using sort STL
+after that print the sorted array, and store in vector<int> ans;
