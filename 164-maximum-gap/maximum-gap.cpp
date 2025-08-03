@@ -10,7 +10,7 @@ public:
         while(i<nums.size()){
             int val=(nums[i]-nums[i-1]);
             max_val=max(val,max_val);
-            i++;
+            ++i;
         }
         return max_val;
     }
