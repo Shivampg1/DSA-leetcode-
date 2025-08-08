@@ -1,1 +1,6 @@
+//At first apply inorder traversal algorithm
+//And then store it into a vector of integer type ans;
+//After that iterate over ans;
+//Return ans[k-1];
+
 
