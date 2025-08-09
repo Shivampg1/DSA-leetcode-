@@ -1,1 +1,22 @@
+Constraints: 
+-2^31 <= n <= 2^31 - 1
 
+so by using this constraints in while loop...
+initialize i=0;
+then apply while(i<31)
+if(n!=pow(2,i))
+then increase i++;
+else
+return true;
+}
+}
+return false;
+
+//Runtime
+  0 
+  ms
+  Beats
+  100.00%
+
+
+ 
