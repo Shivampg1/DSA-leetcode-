@@ -1,1 +1,8 @@
-
+vector<ListNode*> ans;
+while(curr){
+ans.push_back(curr);
+curr=curr->next;
+}
+return ans[ans.size()/2];
+}
+};
