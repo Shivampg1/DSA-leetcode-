@@ -19,10 +19,6 @@ public:
             curr=curr->next;
 
         }
-        // curr=head;
-        // for(int val:ans){
-
-        // }
         return ans[ans.size()/2];
     }
 };
