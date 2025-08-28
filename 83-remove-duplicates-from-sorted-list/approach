@@ -1,1 +1,11 @@
+//approach
+
+if(curr->val==curr->next->val){
+ListNode* same= curr->next;
+curr->next=curr->next->next;
+delete same;
+}
+else{
+curr=curr->next;
+}
 
