@@ -31,7 +31,6 @@ void dfs(TreeNode*node, int targetSum, vector<int>path){
 
 }
 
-
     vector<vector<int>> pathSum(TreeNode* root, int targetSum) {
          vector<int> path;
         dfs(root, targetSum, path);
