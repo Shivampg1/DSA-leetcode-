@@ -1,6 +1,6 @@
 approach
 
-Value Comparison (leftNode->val == rightNode->val):
+Value Comparison (leftNode->val == rightNode->val): 
 
 First, the code checks if the values of the current nodes (leftNode and rightNode) are equal.
 
