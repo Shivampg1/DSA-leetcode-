@@ -16,7 +16,7 @@ public:
             return true; 
         } 
         return ismirror(root->left,root->right);
-        
+         
     }
         bool ismirror(TreeNode* leftNode,TreeNode* rightNode){
             if(leftNode==NULL && rightNode==NULL){
