@@ -12,7 +12,7 @@
 class Solution {
 public:
     bool isSymmetric(TreeNode* root) {
-        if(root==NULL){
+        if(root==NULL){ 
             return true; 
         } 
         return ismirror(root->left,root->right);
