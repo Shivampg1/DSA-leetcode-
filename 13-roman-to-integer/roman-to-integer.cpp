@@ -8,8 +8,6 @@ public:
 
     for (int i = s.length() - 1; i >= 0; --i) {
         int current = roman[s[i]];
-
-        // If current value is less than previous, subtract
         if (current < prev)
             total -= current;
         else
