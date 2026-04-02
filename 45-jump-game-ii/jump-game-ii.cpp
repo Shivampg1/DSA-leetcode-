@@ -15,8 +15,6 @@ public:
             if(max_val < nums[i] + i){
                 max_val = nums[i] + i;
             }
-
-            // only jump when we reach boundary AND not last index
             if(i == end){
                 count++;
                 end = max_val;
