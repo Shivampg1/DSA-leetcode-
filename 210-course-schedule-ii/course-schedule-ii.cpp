@@ -1,76 +1,42 @@
 class Solution {
 public:
-
-  bool iscycle(int src, vector<bool> &vis, vector<bool> &recPath, vector<vector<int>>& edges){
-
-    vis[src]=true;
-    recPath[src]=true;
-
-    for(int i=0;i<edges.size();i++){
-        int v=edges[i][0];
-        int u=edges[i][1];
-
-        if(u==src){
-            if(!vis[v]){
-                if(iscycle(v,vis,recPath, edges)){
-                    return true;
-                }
-            }
-            else if(recPath[v]){ //back edge -> cyclic
-                    return true;
-                }
+bool topo(int src,vector<int>&vis,vector<int>&rec,vector<vector<int>>&adj,stack<int>&st){
+    vis[src]=1;
+    rec[src]=1;
+    for(int neigh:adj[src]){
+        if(!vis[neigh]){
+            if(topo(neigh,vis,rec,adj,st)) return true;
         }
-
+        else if(rec[neigh]){
+            return true;
+        }
+        // rec[src]=0;
     }
-    recPath[src]=false;
+    rec[src]=0;
+    st.push(src);
     return false;
-
-  }
-
-
-void topologic(int src, vector<bool> &vis, stack<int> &s, vector<vector<int>>& edges){
-     vis[src]=true;
-
-     for(int i=0;i<edges.size();i++){
-        int v=edges[i][0];
-        int u=edges[i][1];
-
-        if(u==src){
-            if(!vis[v]){
-                topologic(v,vis,s, edges);
-                }
-            }
+}
+    vector<int> findOrder(int numCourses, vector<vector<int>>& prerequisites) {
+        vector<vector<int>>adj(numCourses);
+        for(auto &p:prerequisites){
+            int v=p[0];
+            int u=p[1];
+         adj[u].push_back(v);
         }
-        s.push(src);
-
-    }
-
-
-    vector<int> findOrder(int n, vector<vector<int>>& edges) {
-        vector<bool> vis(n,false);
-        vector<bool> recPath(n,false);
-
+        vector<int>vis(numCourses,0);
+        vector<int>rec(numCourses,0);
+        stack<int>st;
         vector<int>ans;
 
-        for(int i=0;i<n;i++){
+        for(int i=0;i<numCourses;i++){
             if(!vis[i]){
-                if(iscycle(i,vis,recPath,edges)){
-                    return ans;
-                }
+                if(topo(i,vis,rec,adj,st)) return ans;
             }
         }
+        while(!st.empty()){
+         ans.push_back(st.top());
+         st.pop();
 
-        stack<int>s;
-        vis.assign(n,false);
-
-        for(int i=0;i<n;i++){
-            if(!vis[i]){
-                topologic(i,vis,s, edges);
-                }
-        }
-        while(s.size() > 0){
-            ans.push_back(s.top());
-            s.pop();
         }
         return ans;
     }
