@@ -2,8 +2,8 @@ class Solution {
 public:
     int minDeletionSize(vector<string>& strs) {
         int n = strs.size();
-        int m = strs[0].size(); 
-        int dp[m];
+        int m = strs[0].size();  
+        int dp[m]; 
         int ans = 0;
         auto ok = [&](int col1, int col2){
             for(int i = 0; i < n; i ++){
