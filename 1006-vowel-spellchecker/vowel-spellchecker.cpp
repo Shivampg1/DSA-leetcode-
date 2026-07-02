@@ -2,7 +2,7 @@
 using namespace std;
 
 class Solution {
-public:
+public: 
     vector<string> spellchecker(vector<string>& wordlist,
                                 vector<string>& queries) {
         unordered_set<string> words(wordlist.begin(), wordlist.end());
