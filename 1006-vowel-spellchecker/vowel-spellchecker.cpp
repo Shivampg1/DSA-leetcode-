@@ -4,7 +4,7 @@ using namespace std;
 class Solution {
 public: 
     vector<string> spellchecker(vector<string>& wordlist,
-                                vector<string>& queries) {
+                                vector<string>& queries) { 
         unordered_set<string> words(wordlist.begin(), wordlist.end());
 
         unordered_map<string, string> caseMap;  // lowercase -> first word
