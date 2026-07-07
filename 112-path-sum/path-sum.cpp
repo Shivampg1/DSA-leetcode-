@@ -13,7 +13,7 @@ class Solution {
 public:
     bool hasPathSum(TreeNode* root, int targetSum) {
         if (!root) {
-            return false; 
+            return false;
         }
         
         if (!root->left && !root->right) {
