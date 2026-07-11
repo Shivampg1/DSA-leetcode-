@@ -9,7 +9,7 @@ public:
 
         unordered_map<string, string> caseMap;  // lowercase -> first word
         unordered_map<string, string> vowelMap; // devoweled lowercase -> first
-
+ 
         for (string& w : wordlist) {
             string lower = toLower(w);
             string devowel = deVowel(lower);
