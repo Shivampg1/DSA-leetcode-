@@ -19,7 +19,6 @@ public:
                 count++;
                 end = max_val;
             }
-
             i++;
         }
 
