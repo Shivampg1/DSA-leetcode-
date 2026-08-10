@@ -1,42 +1,34 @@
 class Solution {
 public:
 
-    bool iscycle(int src, vector<bool> &vis,
-                 vector<bool> &recPath,
-                 vector<vector<int>>& edge) {
+bool iscycle(int src,vector<int>& rec, vector<int>&vis,vector<vector<int>>& adj){
+    vis[src]=1;
+    rec[src]=1;
 
-        vis[src] = true;
-        recPath[src] = true;
-
-        for(int i = 0; i < edge.size(); i++) {
-            int v = edge[i][0]; 
-            int u = edge[i][1];
-
-          
-            if(u == src) {
-                if(!vis[v]) {
-                    if(iscycle(v, vis, recPath, edge))
-                        return true;
-                }
-                else if(recPath[v]) {
-                    return true;
-                }
-            }
+    for(int neigh:adj[src]){
+        if(!vis[neigh]){
+           if(iscycle(neigh,rec,vis,adj)) return true;
         }
-
-        recPath[src] = false;
-        return false;
+        else if(rec[neigh]) return true;
     }
+    rec[src]=0;
+    return false;
+}
+    bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
+        //int V;
+        vector<int>vis(numCourses,0);
+        vector<int>rec(numCourses,0);
+vector<vector<int>> adj(numCourses);
+for(auto& p:prerequisites){
+    int v=p[0];
+    int u=p[1];
 
-    bool canFinish(int n, vector<vector<int>>& prerequisites) {
+    adj[v].push_back(u);
+}
 
-        vector<bool> vis(n, false);
-        vector<bool> recPath(n, false);
-
-        for(int i = 0; i < n; i++) {
-            if(!vis[i]) {
-                if(iscycle(i, vis, recPath, prerequisites))
-                    return false; 
+        for(int i=0;i<numCourses;i++){
+            if(!vis[i]){
+                if(iscycle(i,rec,vis,adj)) return false;
             }
         }
         return true;
