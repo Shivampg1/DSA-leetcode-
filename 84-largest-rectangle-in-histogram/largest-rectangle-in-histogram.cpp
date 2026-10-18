@@ -1,68 +1,54 @@
 class Solution {
 public:
+vector<int>nse(vector<int>& heights){
+    int n=heights.size();
+    stack<int>st;
+    vector<int>l(n);
+    for(int i=n-1;i>=0;i--){
+        while(!st.empty() && heights[i]<=heights[st.top()]){
+            st.pop();
+        }
+        if(st.empty()){
+            l[i]=n;
+            st.push(i);
+        }
+        else{
+          l[i]=st.top();
+          st.push(i);
+        }
+    }
+    return l;
+}
+vector<int>pse(vector<int>& heights){
+    int n=heights.size();
+    stack<int>st;
+    vector<int>f(n);
+    for(int i=0;i<n;i++){
+        while(!st.empty() && heights[i]<heights[st.top()]){
+            st.pop();
+        }
+        if(st.empty()){
+            f[i]=-1;
+            st.push(i);
+        }
+        else{
+          f[i]=st.top();
+          st.push(i);
+        }
+    }
+    return f;
+}
     int largestRectangleArea(vector<int>& heights) {
-        vector<int>r;
-        vector<int>l;
-        stack<pair<int,int>>s;
+        vector<int>nxt=nse(heights);
+        vector<int>prv=pse(heights);
         int n=heights.size();
-        for(int i=n-1;i>=0;i--){
-            if(s.empty()){
-                r.push_back(n);
-            }
-            else if(s.size()>0 && s.top().first<heights[i]){
-                r.push_back(s.top().second);
-            }
-            else if(s.size()>0 && s.top().first>=heights[i]){
-                while(s.size()>0 && s.top().first>=heights[i]){
-                    s.pop();
-                }
-                if(s.size()==0){
-                    r.push_back(n);
-                }
-                else{
-                    r.push_back(s.top().second);
-                }
-            }
-            s.push({heights[i],i});
-        }
-        reverse(r.begin(),r.end());
-        
-        stack<pair<int,int>>st;
+        long long sum=0;
         for(int i=0;i<n;i++){
-            if(st.empty()){
-                l.push_back(-1);
-            }
-            else if(st.size()>0 && st.top().first<heights[i]){
-                l.push_back(st.top().second);
-            }
-            else if(st.size()>0 && st.top().first>=heights[i]){
-                while(st.size()>0 && st.top().first>=heights[i]){
-                    st.pop();
-                }
-                if(st.size()==0){
-                    l.push_back(-1);
-                }
-                else{
-                    l.push_back(st.top().second);
-                }
-            }
-            st.push({heights[i],i});
+            int left=prv[i];
+            int right=nxt[i];
+            
+            sum=max(sum,(right-left-1)*heights[i]*1ll);
         }
-        vector<int>w;
-        for(int i=0;i<n;i++){
-            int j=r[i]-l[i]-1;
-            w.push_back(j);
-        }
-        vector<int>area;
-        for(int i=0;i<n;i++){
-            int k=heights[i]*w[i];
-            area.push_back(k);
-        }
-        
-        int max_val=INT_MIN;
-        for(int i=0;i<area.size();i++){
-            max_val=max(max_val,area[i]);
-        }
-        return max_val;
+        return sum;
     }
 };
