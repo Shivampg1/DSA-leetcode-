@@ -1,34 +1,74 @@
-short st[201]={-1}, top=0;
 class Solution {
 public:
-    static int maximalRectangle(vector<vector<char>>& matrix) {
-        const unsigned short row=matrix.size(), col=matrix[0].size();
-        if (row==1 && col==1) return matrix[0][0]=='1';
-        unsigned short h[201]={0};//height 
-        int maxArea=0;
 
-        for(int i=0; i<row; i++){
-            top=0;//stack will not be empty & st[0]=-1
-            for (int j=0; j<=col; j++){
-                // Count the successive '1's & store in h[j]
-                h[j]=(j==col||matrix[i][j]=='0')?0:h[j]+1;
-
-                // monotonic stack has at least element -1
-                while(top>0 && (j==col||h[j]<h[st[top]])){
-                    const int m=st[top--];//pop
-                    const int w=j-st[top]-1;
-                    const int area=h[m]*w;
-                    maxArea=max(maxArea, area);
-                }
-                st[++top]=j;//push
-            }
+vector<int>nse(vector<int>& heights){
+    int n=heights.size();
+    stack<int>st;
+    vector<int>l(n);
+    for(int i=n-1;i>=0;i--){
+        while(!st.empty() && heights[i]<=heights[st.top()]){
+            st.pop();
         }
-        return maxArea;
+        if(st.empty()){
+            l[i]=n;
+            st.push(i);
+        }
+        else{
+          l[i]=st.top();
+          st.push(i);
+        }
+    }
+    return l;
+}
+vector<int>pse(vector<int>& heights){
+    int n=heights.size();
+    stack<int>st;
+    vector<int>f(n);
+    for(int i=0;i<n;i++){
+        while(!st.empty() && heights[i]<heights[st.top()]){
+            st.pop();
+        }
+        if(st.empty()){
+            f[i]=-1;
+            st.push(i);
+        }
+        else{
+          f[i]=st.top();
+          st.push(i);
+        }
+    }
+    return f;
+}
+    int largestRectangleArea(vector<int>& heights) {
+        vector<int>nxt=nse(heights);
+        vector<int>prv=pse(heights);
+        int n=heights.size();
+        long long sum=0;
+        for(int i=0;i<n;i++){
+            int left=prv[i];
+            int right=nxt[i];
+            
+            sum=max(sum,(right-left-1)*heights[i]*1ll);
+        }
+        return sum;
+    }
+    int maximalRectangle(vector<vector<char>>& matrix) {
+        int n=matrix.size();
+        int m=matrix[0].size();
+        int ans=0;
+        vector<int>heights(m,0);
+       for(int i=0;i<n;i++){
+        for(int j=0;j<m;j++){
+           if(matrix[i][j]=='0') heights[j]=0;
+
+           else{
+            heights[j]++;
+           }
+        }
+        ans=max(ans,largestRectangleArea(heights));
+
+       }
+       return ans;
+        
     }
 };
-auto init = []() {
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
-    cout.tie(nullptr);
-    return 'c';
-}();
